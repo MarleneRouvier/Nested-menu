@@ -1,0 +1,80 @@
+<div class="container">
+  <div class="container__title">
+    <span>Nested Menu</span>
+  </div>
+
+  <div class="container__menu">
+    <button mat-button [matMenuTriggerFor]="nestedMenu">Menu</button>
+    
+    <mat-menu #nestedMenu="matMenu">
+      <ng-container *ngFor="let item of menuItems">
+        <ng-container *ngIf="item.id == 1">
+          <button [matMenuTriggerFor]="bebidas" mat-menu-item> {{ item.name }} </button>
+        </ng-container>
+        <ng-container *ngIf="item.id == 2">
+          <button mat-menu-item> {{ item.name }} </button>
+        </ng-container>
+        <ng-container *ngIf="item.id == 3">
+          <button mat-menu-item> {{ item.name }} </button>
+        </ng-container>
+      </ng-container>
+    </mat-menu>
+
+    <mat-menu #bebidas="matMenu">
+      <ng-container *ngFor="let item of menuItems">
+        <ng-container *ngIf="item.parentId == 1 && (item.id > 99 && item.id < 200)">
+          <button [matMenuTriggerFor]="gaseosa" mat-menu-item> {{ item.name }} </button>
+        </ng-container>
+      </ng-container>
+    </mat-menu>
+
+    <mat-menu #gaseosa="matMenu">
+      <ng-container *ngFor="let item of menuItems">
+        <ng-container *ngIf="item.parentId == 100 && (item.id > 1009 && item.id < 1020)">
+          <button mat-menu-item> {{ item.name }} </button>
+        </ng-container>
+        <ng-container *ngIf="item.parentId == 100 && (item.id > 999 && item.id < 1010)">
+          <button [matMenuTriggerFor]="sinAlcohol" mat-menu-item> {{ item.name }} </button>
+        </ng-container>
+      </ng-container>
+    </mat-menu>
+
+    <mat-menu #sinAlcohol="matMenu">
+      <ng-container *ngFor="let item of menuItems">
+        <ng-container *ngIf="item.parentId == 1009 && (item.id > 99 && item.id < 103)">
+          <button mat-menu-item> {{ item.name }} </button>
+        </ng-container>
+        <ng-container *ngIf="item.parentId == 1009 && (item.id > 102 && item.id < 106)">
+          <button [matMenuTriggerFor]="sinAzucar" mat-menu-item> {{ item.name }} </button>
+        </ng-container>
+      </ng-container>
+    </mat-menu>
+
+    <mat-menu #sinAzucar="matMenu">
+      <ng-container *ngFor="let item of menuItems">
+        <ng-container *ngIf="item.parentId == 103 && (item.id > 150 && item.id < 800)">
+          <button mat-menu-item> {{ item.name }} </button>
+        </ng-container>
+        <ng-container *ngIf="item.parentId == 103 && (item.id > 800 && item.id < 1223)">
+          <button [matMenuTriggerFor]="energizantes" mat-menu-item> {{ item.name }} </button>
+        </ng-container>
+      </ng-container>
+    </mat-menu>
+
+    <mat-menu #energizantes="matMenu">
+      <ng-container *ngFor="let item of menuItems">
+        <ng-container *ngIf="item.parentId == 1222 && (item.id > 1222 && item.id < 2000)">
+          <button [matMenuTriggerFor]="fruta" mat-menu-item> {{ item.name }} </button>
+        </ng-container>
+      </ng-container>
+    </mat-menu>
+
+    <mat-menu #fruta="matMenu">
+      <ng-container *ngFor="let item of menuItems">
+        <ng-container *ngIf="item.parentId == 1223 && (item.id > 2000 && item.id < 15000000)">
+          <button mat-menu-item> {{ item.name }} </button>
+        </ng-container>
+      </ng-container>
+    </mat-menu>
+  </div>
+</div>
